@@ -1,7 +1,22 @@
+@import 'variables.scss';
+
 body,
-html{
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.content {
+  padding: 20px;
+  background: $lightgrey;
+}
+
+.snack-bar-bg-color-ok {
+  background-color: #009900;
+}
+
+table {
+  width: 100%;
 }
