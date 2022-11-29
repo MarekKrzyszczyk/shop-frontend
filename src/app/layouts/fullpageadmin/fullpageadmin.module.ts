@@ -4,6 +4,7 @@ import {RouterModule} from "@angular/router";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FullpageadminComponent} from "./fullpageadmin.component";
 import {AdminComponent} from "../../modules/admin/admin.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {AdminComponent} from "../../modules/admin/admin.component";
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ]
 })
 export class FullpageadminModule {
