@@ -5,12 +5,14 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FullpageadminComponent} from "./fullpageadmin.component";
 import {AdminComponent} from "../../modules/admin/admin.component";
 import {SharedModule} from "../../shared/shared.module";
+import {AdminProductComponent} from "../../modules/admin/admin-product/admin-product.component";
 
 
 @NgModule({
   declarations: [
     FullpageadminComponent,
-    AdminComponent
+    AdminComponent,
+    AdminProductComponent
   ],
   imports: [
     CommonModule,
