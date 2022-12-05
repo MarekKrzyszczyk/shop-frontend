@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {DefaultComponent} from "./layouts/default/default.component";
 import {HomeComponent} from "./modules/home/home.component";
 import {ProductComponent} from "./modules/product/product.component";
@@ -8,6 +8,7 @@ import {LoginComponent} from "./modules/login/login.component";
 import {FullpageadminComponent} from "./layouts/fullpageadmin/fullpageadmin.component";
 import {AdminComponent} from "./modules/admin/admin.component";
 import {AdminProductComponent} from "./modules/admin/admin-product/admin-product.component";
+import {AdminProductUpdateComponent} from "./modules/admin/admin-product-update/admin-product-update.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
   {
     path: '', component: FullpageadminComponent, children: [
       {path: 'admin', component: AdminComponent},
-      {path: 'admin/products', component: AdminProductComponent}
+      {path: 'admin/products', component: AdminProductComponent},
+      {path: 'admin/products/update/:id', component: AdminProductUpdateComponent}
     ]
   }
 ];
@@ -33,4 +35,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

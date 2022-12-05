@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator} from "@angular/material/paginator";
 import {AdminProductService} from "./admin-product.service";
-import {map, startWith, switchMap} from "rxjs";
+import {startWith, switchMap} from "rxjs";
 import {AdminProduct} from "./adminProduct";
 
 @Component({
@@ -12,7 +12,7 @@ import {AdminProduct} from "./adminProduct";
 export class AdminProductComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ["id", "name", "price"];
+  displayedColumns: string[] = ["id", "name", "price", "actions"];
   totalElement: number = 0;
   data: AdminProduct[] = [];
 
@@ -24,12 +24,11 @@ export class AdminProductComponent implements AfterViewInit {
       startWith({}),
       switchMap(() => {
         return this.adminProductService.getProducts(this.paginator.pageIndex, this.paginator.pageSize);
-      }),
-      map(data => {
-        this.totalElement = data.totalElements;
-        return data.content;
       })
-    ).subscribe(data => this.data = data)
+    ).subscribe(data => {
+      this.totalElement = data.totalElements;
+      this.data = data.content;
+    })
   }
 
 }
