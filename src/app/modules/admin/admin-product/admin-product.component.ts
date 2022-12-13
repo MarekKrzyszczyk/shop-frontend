@@ -3,6 +3,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {AdminProductService} from "./admin-product.service";
 import {startWith, switchMap} from "rxjs";
 import {AdminProduct} from "./adminProduct";
+import {AdminConfirmDialogService} from "../admin-confirm-dialog.service";
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-admin-product',
@@ -12,11 +14,13 @@ import {AdminProduct} from "./adminProduct";
 export class AdminProductComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatTable) table!: MatTable<any>;
   displayedColumns: string[] = ["id", "name", "price", "actions"];
   totalElement: number = 0;
   data: AdminProduct[] = [];
 
-  constructor(private adminProductService: AdminProductService) {
+  constructor(private adminProductService: AdminProductService,
+              private adminConfirmDialogService: AdminConfirmDialogService) {
   }
 
   ngAfterViewInit(): void {
@@ -31,4 +35,21 @@ export class AdminProductComponent implements AfterViewInit {
     })
   }
 
+  confirmDelete(element: AdminProduct): void {
+    this.adminConfirmDialogService.openConfirmDialog("Are you sure you want to remove this product?")
+    .afterClosed()
+    .subscribe(result => {
+      if (result) {
+        this.adminProductService.delete(element.id)
+        .subscribe(() => {
+          this.data.forEach((value, index) => {
+            if (element == value) {
+              this.data.splice(index, 1);
+              this.table.renderRows();
+            }
+          })
+        });
+      }
+    })
+  }
 }
