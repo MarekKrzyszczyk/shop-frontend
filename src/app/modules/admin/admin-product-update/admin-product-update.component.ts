@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {AdminProductUpdateService} from "./admin-product-update.service";
 import {AdminProductUpdate} from "./model/adminProductUpdate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AdminProduct} from "../admin-product/adminProduct";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AdminMessageService} from "../admin-message.service";
 
@@ -15,6 +14,9 @@ import {AdminMessageService} from "../admin-message.service";
 export class AdminProductUpdateComponent implements OnInit {
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  imageForm!: FormGroup;
+  requiredFileTypes: string = "image/jpeg, image/png";
+  image: string | null = null;
 
   constructor(private router: ActivatedRoute,
               private adminProductUpdateService: AdminProductUpdateService,
@@ -32,21 +34,32 @@ export class AdminProductUpdateComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required]
     });
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    });
   }
 
   getProduct(): void {
     let id = Number(this.router.snapshot.params['id']);
     this.adminProductUpdateService.getProduct(id)
-    .subscribe(product => this.productForm.setValue(AdminProductUpdateComponent.mapFormValues(product))
+    .subscribe(product => this.mapFormValues(product)
     );
   }
 
   submit(): void {
     let id = Number(this.router.snapshot.params['id']);
-    this.adminProductUpdateService.savePost(id, this.productForm.value)
+    this.adminProductUpdateService.savePost(id, {
+      name: this.productForm.get('name')?.value,
+      description: this.productForm.get('description')?.value,
+      category: this.productForm.get('category')?.value,
+      price: this.productForm.get('price')?.value,
+      currency: this.productForm.get('currency')?.value,
+      image: this.image
+    } as AdminProductUpdate)
     .subscribe({
         next: product => {
-          this.productForm.setValue(AdminProductUpdateComponent.mapFormValues(product));
+          this.mapFormValues(product);
           this.snackBar.open("Product was updated", '', {duration: 3000})
         },
       error: err => this.adminMessageService.addSpringError(err.error)
@@ -54,13 +67,29 @@ export class AdminProductUpdateComponent implements OnInit {
     );
   }
 
-  private static mapFormValues(product: AdminProductUpdate) {
-    return {
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value)
+    this.adminProductUpdateService.uploadImage(formData)
+    .subscribe(result => this.image = result.filename);
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      });
+    }
+  }
+
+  private mapFormValues(product: AdminProductUpdate): void {
+    this.productForm.setValue({
       name: product.name,
       description: product.description,
       category: product.category,
       price: product.price,
-      currency: product.currency
-    };
+      currency: product.currency,
+    });
+    this.image = product.image;
   }
 }
