@@ -13,6 +13,13 @@ import {FormGroup} from "@angular/forms";
         </div>
       </mat-form-field>
       <mat-form-field>
+        <mat-label>User-friendly url</mat-label>
+        <input matInput placeholder="Enter url" formControlName="slug">
+        <div *ngIf="slug?.invalid && (slug?.dirty || slug?.touched)">
+          <div class="errorMessages">Slug is required</div>
+        </div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea matInput rows="5" placeholder="Enter product desc" formControlName="description"></textarea>
         <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
@@ -74,5 +81,9 @@ export class AdminProductFormComponent {
 
   get currency() {
     return this.parentForm.get("currency");
+  }
+
+  get slug() {
+    return this.parentForm.get("slug");
   }
 }

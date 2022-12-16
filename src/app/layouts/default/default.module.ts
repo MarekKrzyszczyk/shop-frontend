@@ -6,13 +6,15 @@ import {HomeComponent} from "../../modules/home/home.component";
 import {RouterModule} from "@angular/router";
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SharedModule} from "../../shared/shared.module";
+import {ProductDetailsComponent} from "../../modules/product-details/product-details.component";
 
 
 @NgModule({
   declarations: [
     DefaultComponent,
     ProductComponent,
-    HomeComponent
+    HomeComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
