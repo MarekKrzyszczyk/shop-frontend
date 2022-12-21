@@ -30,7 +30,8 @@ export class AdminProductUpdateComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      category: ['', Validators.required],
+      fullDescription: [''],
+      categoryId: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       currency: ['PLN', Validators.required],
       slug: ['', Validators.required]
@@ -53,7 +54,8 @@ export class AdminProductUpdateComponent implements OnInit {
     this.adminProductUpdateService.savePost(id, {
       name: this.productForm.get('name')?.value,
       description: this.productForm.get('description')?.value,
-      category: this.productForm.get('category')?.value,
+      fullDescription: this.productForm.get('fullDescription')?.value,
+      categoryId: this.productForm.get('categoryId')?.value,
       price: this.productForm.get('price')?.value,
       currency: this.productForm.get('currency')?.value,
       image: this.image,
@@ -88,7 +90,8 @@ export class AdminProductUpdateComponent implements OnInit {
     this.productForm.setValue({
       name: product.name,
       description: product.description,
-      category: product.category,
+      fullDescription: product.fullDescription,
+      categoryId: product.categoryId,
       price: product.price,
       currency: product.currency,
       slug: product.slug

@@ -12,6 +12,16 @@ import {AdminProductAddComponent} from "../../modules/admin/admin-product-add/ad
 import {AdminProductFormComponent} from "../../modules/admin/admin-product-form/admin-product-form.component";
 import {AdminMessageComponent} from "../../modules/admin/admin-message/admin-message.component";
 import {AdminConfirmDialogComponent} from "../../modules/admin/admin-confirm-dialog/admin-confirm-dialog.component";
+import {AdminCategoryComponent} from "../../modules/admin/admin-category/admin-category.component";
+import {
+  AdminCategoryUpdateComponent
+} from "../../modules/admin/admin-category/admin-category-update/admin-category-update.component";
+import {
+  AdminCategoryAddComponent
+} from "../../modules/admin/admin-category/admin-category-add/admin-category-add.component";
+import {
+  AdminCategoryFormComponent
+} from "../../modules/admin/admin-category/admin-category-form/admin-category-form.component";
 
 
 @NgModule({
@@ -23,7 +33,11 @@ import {AdminConfirmDialogComponent} from "../../modules/admin/admin-confirm-dia
     AdminProductAddComponent,
     AdminProductFormComponent,
     AdminMessageComponent,
-    AdminConfirmDialogComponent
+    AdminConfirmDialogComponent,
+    AdminCategoryComponent,
+    AdminCategoryUpdateComponent,
+    AdminCategoryAddComponent,
+    AdminCategoryFormComponent
   ],
   imports: [
     CommonModule,
