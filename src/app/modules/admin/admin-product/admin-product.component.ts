@@ -2,8 +2,8 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {AdminProductService} from "./admin-product.service";
 import {startWith, switchMap} from "rxjs";
-import {AdminProduct} from "./adminProduct";
-import {AdminConfirmDialogService} from "../admin-confirm-dialog.service";
+import {AdminProduct} from "./model/adminProduct";
+import {AdminConfirmDialogService} from "../common/service/admin-confirm-dialog.service";
 import {MatTable} from "@angular/material/table";
 
 @Component({

@@ -3,8 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminProductAddService} from "./admin-product-add.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
-import {AdminMessageService} from "../admin-message.service";
-import {AdminProductUpdate} from "../admin-product-update/model/adminProductUpdate";
+import {AdminMessageService} from "../../common/service/admin-message.service";
+import {AdminProductUpdate} from "../model/adminProductUpdate";
+import {AdminProductImageService} from "../admin-product-image.service";
 
 @Component({
   selector: 'app-admin-product-add',
@@ -19,7 +20,8 @@ export class AdminProductAddComponent implements OnInit {
   image: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
-              private service: AdminProductAddService,
+              private adminProductAddService: AdminProductAddService,
+              private adminProductImageService: AdminProductImageService,
               private router: Router,
               private snackBar: MatSnackBar,
               private adminMessageService: AdminMessageService) {
@@ -42,7 +44,7 @@ export class AdminProductAddComponent implements OnInit {
   }
 
   submit() {
-    this.service.saveProduct({
+    this.adminProductAddService.saveProduct({
       name: this.productForm.get('name')?.value,
       description: this.productForm.get('description')?.value,
       fullDescription: this.productForm.get('fullDescription')?.value,
@@ -68,7 +70,7 @@ export class AdminProductAddComponent implements OnInit {
   uploadFile() {
     let formData = new FormData();
     formData.append('file', this.imageForm.get('file')?.value)
-    this.service.uploadImage(formData)
+    this.adminProductImageService.uploadImage(formData)
     .subscribe(result => this.image = result.filename);
   }
 
