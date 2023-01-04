@@ -22,6 +22,7 @@ import {
 import {
   AdminCategoryFormComponent
 } from "../../modules/admin/admin-category/admin-category-form/admin-category-form.component";
+import {AdminReviewComponent} from "../../modules/admin/admin-review/admin-review.component";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {
     AdminCategoryComponent,
     AdminCategoryUpdateComponent,
     AdminCategoryAddComponent,
-    AdminCategoryFormComponent
+    AdminCategoryFormComponent,
+    AdminReviewComponent
   ],
   imports: [
     CommonModule,

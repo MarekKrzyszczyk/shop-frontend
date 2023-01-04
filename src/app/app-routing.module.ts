@@ -19,6 +19,7 @@ import {
   AdminCategoryUpdateComponent
 } from "./modules/admin/admin-category/admin-category-update/admin-category-update.component";
 import {CategoryComponent} from "./modules/category/category.component";
+import {AdminReviewComponent} from "./modules/admin/admin-review/admin-review.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'admin/categories', component: AdminCategoryComponent},
       {path: 'admin/categories/add', component: AdminCategoryAddComponent},
       {path: 'admin/categories/update/:id', component: AdminCategoryUpdateComponent},
+      {path: 'admin/reviews', component: AdminReviewComponent},
     ]
   }
 ];
