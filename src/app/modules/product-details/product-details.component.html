@@ -13,7 +13,8 @@
       <div fxLayout="row" fxFlexAlign="end">
         <span class="price">{{product?.price}} {{product?.currency}}</span>
       </div>
-      <button mat-flat-button color="warn">Add to cart</button>
+      <button mat-flat-button color="warn" routerLink="/cart" [queryParams]="{productId: product?.id}">Add to
+        cart</button>
     </div>
   </div>
   <div>
@@ -39,7 +40,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Your opinion about product</mat-label>
-        <textarea matInput rows="5" placeholder="Twoja opinia" formControlName="content"></textarea>
+        <textarea matInput rows="5" placeholder="Your opinion" formControlName="content"></textarea>
         <div *ngIf="content?.invalid && (content?.dirty || content?.touched)" class="errorMessage">
           <div *ngIf="content?.errors?.['required']">
             Content is required

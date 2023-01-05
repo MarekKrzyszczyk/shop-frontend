@@ -1,0 +1,27 @@
+<h1>Cart</h1>
+<div *ngIf="cartSummary?.items">
+  <div fxLayout="row" fxLayoutAlign="space-between start" class="card-hrow">
+    <div class="cart-hcol-1">Image</div>
+    <div class="cart-hcol-2">Name</div>
+    <div class="cart-hcol-3">Quantity</div>
+    <div class="cart-hcol-4">Amount</div>
+  </div>
+  <div *ngFor="let item of cartSummary?.items" fxLayout="row" fxLayoutAlign="space-between start" class="card-row">
+    <div class="cart-col-1">
+      <a routerLink="{{'/products/' + item?.productDto?.slug}}">
+        <img *ngIf="!item?.productDto?.image" src="/assets/image-placeholder.png" width="100">
+        <img *ngIf="item?.productDto?.image" src="{{'/api/data/productImage/' + item?.productDto?.image}}" width="100">
+      </a>
+    </div>
+    <div class="cart-col-2">{{item?.productDto?.name}}</div>
+    <div class="cart-col-3">{{item?.quantity}}</div>
+    <div class="cart-col-4">{{item?.lineValue}}</div>
+  </div>
+  <div fxLayoutAlign="end start">
+    <div class="summary"> Amount: </div>
+    <div class="summary"><b>{{cartSummary?.summary?.grossValue}}</b></div>
+  </div>
+</div>
+<div *ngIf="!cartSummary?.items">
+  Cart is empty!
+</div>
