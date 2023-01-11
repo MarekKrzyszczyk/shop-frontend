@@ -1,0 +1,118 @@
+<h1>Order</h1>
+
+<div *ngIf="orderSummary" class="orderSummary">
+  <div>New order number: {{orderSummary.id}}</div>
+  <div>Placement date: {{orderSummary.placementDate | date: 'yyyy-MM-dd HH:mm'}}</div>
+  <div>Status: {{orderSummary.status}}</div>
+  <div>Amount: {{orderSummary.grossValue}}</div>
+</div>
+
+<div *ngIf="!orderSummary && cartSummary && cartSummary.items.length <= 0">
+  Cart is empty, you cannot place an order
+</div>
+<div *ngIf="!orderSummary && cartSummary && cartSummary.items.length > 0">
+  <form [formGroup]="formGroup" (submit)="submit()">
+    <div fxLayout="column" class="orderForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Firstname</mat-label>
+        <input matInput placeholder="Podaj imię" formControlName="firstname">
+        <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
+          <div *ngIf="firstname?.errors?.['required']">
+            Firstname is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Lastname</mat-label>
+        <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+        <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+          <div *ngIf="lastname?.errors?.['required']">
+            Lastname is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Street</mat-label>
+        <input matInput placeholder="Podaj ulicę" formControlName="street">
+        <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="errorMessage">
+          <div *ngIf="street?.errors?.['required']">
+            Street is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Zipcode</mat-label>
+        <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
+        <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
+          <div *ngIf="zipcode?.errors?.['required']">
+            Zipcode is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput placeholder="Podaj miasto" formControlName="city">
+        <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="errorMessage">
+          <div *ngIf="city?.errors?.['required']">
+            City is required
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Podaj email" formControlName="email">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="errorMessage">
+          <div *ngIf="email?.errors?.['required']">
+            Email is required
+          </div>
+          <div *ngIf="email?.errors?.['email']">
+            Please enter correct email address
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Podaj telefon" formControlName="phone">
+        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
+          <div *ngIf="phone?.errors?.['required']">
+            Phone is required
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div>
+      <div fxLayoutGap="25px grid">
+        <div>
+          <h2>Order:</h2>
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="card-hrow">
+            <div class="cart-hcol-1">Image</div>
+            <div class="cart-hcol-2">Name</div>
+            <div class="cart-hcol-3">Quantity</div>
+            <div class="cart-hcol-4">Amount</div>
+          </div>
+          <div *ngFor="let item of cartSummary.items; let i = index" class="card-row">
+            <div fxLayout="row" fxLayoutAlign="space-between start">
+              <div class="cart-col-1">
+                <a routerLink="{{'/products/' + item.productDto?.slug}}">
+                  <img *ngIf="!item.productDto?.image" src="/assets/image-placeholder.png" width="100">
+                  <img *ngIf="item.productDto?.image" src="{{'/api/data/productImage/' + item.productDto?.image}}"
+                       width="100">
+                </a>
+              </div>
+              <div class="cart-col-2">{{item.productDto?.name}}</div>
+              <div class="cart-col-3">{{item.quantity}}</div>
+              <div class="cart-col-4">{{item.lineValue}}</div>
+            </div>
+          </div>
+          <div fxLayoutAlign="end start">
+            <div class="summary">Amount:</div>
+            <div class="summary"><b>{{cartSummary?.summary?.grossValue}}</b></div>
+          </div>
+        </div>
+        <div fxLayoutAlign="end start">
+          <button mat-flat-button color="accent" class="orderButton">Order and Buy</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

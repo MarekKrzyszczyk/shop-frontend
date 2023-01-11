@@ -34,12 +34,14 @@
       <div class="summary"><b>{{cartSummary?.summary?.grossValue}}</b></div>
     </div>
   </div>
+  <div>
+    <button mat-flat-button color="warn" (click)="back()">Back to shopping</button>
+  </div>
+  <div fxLayoutAlign="end start">
+    <button type="button" class="orderButton" mat-flat-button color="accent" routerLink="/order">Order</button>
+  </div>
 </form>
 <div *ngIf="!cartSummary?.items?.length">
   Cart is empty!
-</div>
-<div>
-  <button mat-flat-button color="warn" (click)="back()">Powrót do
-    zakupów</button>
 </div>
 
