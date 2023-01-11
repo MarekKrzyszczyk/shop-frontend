@@ -23,6 +23,6 @@ export class CartService {
   }
 
   deleteCartItem(id: number): Observable<void> {
-    return this.http.delete<void>(`/api/carItems/${id}`);
+    return this.http.delete<void>(`/api/cartItems/${id}`);
   }
 }
