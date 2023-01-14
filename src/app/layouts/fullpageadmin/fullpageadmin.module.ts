@@ -13,20 +13,12 @@ import {AdminProductFormComponent} from "../../modules/admin/admin-product/admin
 import {AdminMessageComponent} from "../../modules/admin/common/component/admin-message/admin-message.component";
 import {AdminConfirmDialogComponent} from "../../modules/admin/common/component/admin-confirm-dialog/admin-confirm-dialog.component";
 import {AdminCategoryComponent} from "../../modules/admin/admin-category/admin-category.component";
-import {
-  AdminCategoryUpdateComponent
-} from "../../modules/admin/admin-category/admin-category-update/admin-category-update.component";
-import {
-  AdminCategoryAddComponent
-} from "../../modules/admin/admin-category/admin-category-add/admin-category-add.component";
-import {
-  AdminCategoryFormComponent
-} from "../../modules/admin/admin-category/admin-category-form/admin-category-form.component";
+import {AdminCategoryUpdateComponent} from "../../modules/admin/admin-category/admin-category-update/admin-category-update.component";
+import {AdminCategoryAddComponent} from "../../modules/admin/admin-category/admin-category-add/admin-category-add.component";
+import {AdminCategoryFormComponent} from "../../modules/admin/admin-category/admin-category-form/admin-category-form.component";
 import {AdminReviewComponent} from "../../modules/admin/admin-review/admin-review.component";
 import {AdminOrderComponent} from "../../modules/admin/admin-order/admin-order.component";
-import {
-  AdminOrderUpdateComponent
-} from "../../modules/admin/admin-order/admin-order-update/admin-order-update.component";
+import {AdminOrderUpdateComponent} from "../../modules/admin/admin-order/admin-order-update/admin-order-update.component";
 
 
 @NgModule({

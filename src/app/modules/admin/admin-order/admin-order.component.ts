@@ -14,12 +14,14 @@ export class AdminOrderComponent implements AfterViewInit {
   displayedColumns: string[] = ["id", "placeDate", "orderStatus", "grossValue", "actions"];
   totalElements: number = 0;
   data: Array<AdminOrder> = [];
+  statuses!: Map<string, string>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private adminOrderService: AdminOrderService) { }
 
   ngAfterViewInit(): void {
+    this.getInitData();
     this.paginator.page.pipe(
       startWith({}),
       switchMap(() => {
@@ -35,4 +37,12 @@ export class AdminOrderComponent implements AfterViewInit {
     ).subscribe(data => this.data = data);
   }
 
+  getInitData() {
+    this.adminOrderService.getInitData()
+      .subscribe(value => this.statuses = new Map(Object.entries(value.orderStatuses)));
+  }
+
+  resolveStatus(status: string) {
+    return this.statuses?.get(status);
+  }
 }

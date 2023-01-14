@@ -3,7 +3,7 @@ import {AdminPayment} from "./adminPayment";
 
 export interface AdminOrder{
   id: number,
-  placeDate: Date,
+  placementDate: Date,
   orderStatus: string,
   orderRows: Array<AdminOrderRow>
   grossValue: number,
