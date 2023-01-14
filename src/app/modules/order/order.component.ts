@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OrderDto} from "./model/orderDto";
 import {OrderSummary} from "./model/orderSummary";
 import {InitData} from "./model/initData";
+import {CartIconService} from "../common/service/cart-icon.service";
 
 @Component({
   selector: 'app-order',
@@ -22,7 +23,8 @@ export class OrderComponent implements OnInit {
 
   constructor(private cookieService: CookieService,
               private orderService: OrderService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private cartIconService: CartIconService) {
   }
 
   ngOnInit(): void {
@@ -60,14 +62,15 @@ export class OrderComponent implements OnInit {
         shipmentId: Number(this.formGroup.get("shipment")?.value.id),
         paymentId: Number(this.formGroup.get("payment")?.value.id)
       } as OrderDto)
-      .subscribe({
-        next: value => {
-        this.orderSummary = value;
-        this.cookieService.delete("cartId");
-          this.errorMessage = false;
-      },
-        error: err => this.errorMessage = true
-      });
+        .subscribe({
+          next: value => {
+            this.orderSummary = value;
+            this.cookieService.delete("cartId");
+            this.errorMessage = false;
+            this.cartIconService.cartChanged(0);
+          },
+          error: err => this.errorMessage = true
+        });
     }
   }
 
@@ -81,13 +84,17 @@ export class OrderComponent implements OnInit {
   }
 
   private setDefaultShipment() {
-    this.formGroup.patchValue({"shipment": this.initData.shipments
-      .filter(shipment => shipment.defaultShipment)[0]});
+    this.formGroup.patchValue({
+      "shipment": this.initData.shipments
+        .filter(shipment => shipment.defaultShipment)[0]
+    });
   }
 
   private setDefaultPayment() {
-    this.formGroup.patchValue({"payment": this.initData.payments
-        .filter(payment => payment.defaultPayment)[0]});
+    this.formGroup.patchValue({
+      "payment": this.initData.payments
+        .filter(payment => payment.defaultPayment)[0]
+    });
   }
 
   get firstname() {
