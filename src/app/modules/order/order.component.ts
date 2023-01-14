@@ -18,6 +18,7 @@ export class OrderComponent implements OnInit {
   orderSummary!: OrderSummary;
   formGroup!: FormGroup;
   initData!: InitData;
+  errorMessage: boolean = false;
 
   constructor(private cookieService: CookieService,
               private orderService: OrderService,
@@ -59,9 +60,13 @@ export class OrderComponent implements OnInit {
         shipmentId: Number(this.formGroup.get("shipment")?.value.id),
         paymentId: Number(this.formGroup.get("payment")?.value.id)
       } as OrderDto)
-      .subscribe(value => {
+      .subscribe({
+        next: value => {
         this.orderSummary = value;
         this.cookieService.delete("cartId");
+          this.errorMessage = false;
+      },
+        error: err => this.errorMessage = true
       });
     }
   }
