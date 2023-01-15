@@ -1,5 +1,6 @@
 import {AdminOrderRow} from "./adminOrderRow";
 import {AdminPayment} from "./adminPayment";
+import {AdminOrderLog} from "./AdminOrderLog";
 
 export interface AdminOrder{
   id: number,
@@ -14,5 +15,6 @@ export interface AdminOrder{
   city: string,
   email: string,
   phone: string,
-  payment: AdminPayment
+  payment: AdminPayment,
+  orderLogs: Array<AdminOrderLog>
 }

@@ -18,7 +18,8 @@ export class AdminOrderUpdateComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private adminOrderService: AdminOrderService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.getOrder();
@@ -35,7 +36,9 @@ export class AdminOrderUpdateComponent implements OnInit {
         this.order = order;
         this.formGroup.setValue({
           orderStatus: order.orderStatus
-        })
+        });
+        order.orderLogs.sort(
+          (log, log2) => new Date(log2.created).getTime() - new Date(log.created).getTime())
       });
   }
 
