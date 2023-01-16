@@ -19,6 +19,9 @@ import {AdminCategoryFormComponent} from "../../modules/admin/admin-category/adm
 import {AdminReviewComponent} from "../../modules/admin/admin-review/admin-review.component";
 import {AdminOrderComponent} from "../../modules/admin/admin-order/admin-order.component";
 import {AdminOrderUpdateComponent} from "../../modules/admin/admin-order/admin-order-update/admin-order-update.component";
+import {
+  AdminOrderExportComponent
+} from "../../modules/admin/admin-order/admin-order-export/admin-order-export.component";
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import {AdminOrderUpdateComponent} from "../../modules/admin/admin-order/admin-o
     AdminCategoryFormComponent,
     AdminReviewComponent,
     AdminOrderComponent,
-    AdminOrderUpdateComponent
+    AdminOrderUpdateComponent,
+    AdminOrderExportComponent
   ],
   imports: [
     CommonModule,
