@@ -22,6 +22,7 @@ import {AdminOrderUpdateComponent} from "../../modules/admin/admin-order/admin-o
 import {
   AdminOrderExportComponent
 } from "../../modules/admin/admin-order/admin-order-export/admin-order-export.component";
+import {AdminOrderStatsComponent} from "../../modules/admin/admin-order/admin-order-stats/admin-order-stats.component";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {
     AdminReviewComponent,
     AdminOrderComponent,
     AdminOrderUpdateComponent,
-    AdminOrderExportComponent
+    AdminOrderExportComponent,
+    AdminOrderStatsComponent
   ],
   imports: [
     CommonModule,
