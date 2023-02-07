@@ -6,8 +6,9 @@
   <div>Status: {{orderSummary.status}}</div>
   <div>Amount: {{orderSummary.grossValue}}</div>
   <div *ngIf="orderSummary.payment.note">Payment: <br>
-    <span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace:'\n': '\<br>'" ></span>
+    <span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace:'\n': '\<br>'"></span>
   </div>
+  <div *ngIf="isLoggedIn">Order status can be tracked in your <a routerLink="/profile">profile</a></div>
 </div>
 
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length <= 0">
@@ -15,73 +16,76 @@
 </div>
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length > 0">
   <form [formGroup]="formGroup" (submit)="submit()">
-    <div fxLayout="column" class="orderForm">
-      <mat-form-field appearance="fill">
-        <mat-label>Firstname</mat-label>
-        <input matInput placeholder="Podaj imię" formControlName="firstname">
-        <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
-          <div *ngIf="firstname?.errors?.['required']">
-            Firstname is required
+    <div fxLayout="row" fxLayoutGap="15px">
+      <div fxLayout="column" class="orderForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Firstname</mat-label>
+          <input matInput placeholder="Podaj imię" formControlName="firstname">
+          <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
+            <div *ngIf="firstname?.errors?.['required']">
+              Firstname is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Lastname</mat-label>
-        <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
-        <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
-          <div *ngIf="lastname?.errors?.['required']">
-            Lastname is required
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Lastname</mat-label>
+          <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
+          <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
+            <div *ngIf="lastname?.errors?.['required']">
+              Lastname is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Street</mat-label>
-        <input matInput placeholder="Podaj ulicę" formControlName="street">
-        <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="errorMessage">
-          <div *ngIf="street?.errors?.['required']">
-            Street is required
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput placeholder="Podaj ulicę" formControlName="street">
+          <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="errorMessage">
+            <div *ngIf="street?.errors?.['required']">
+              Street is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Zipcode</mat-label>
-        <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
-        <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
-          <div *ngIf="zipcode?.errors?.['required']">
-            Zipcode is required
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Zipcode</mat-label>
+          <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
+          <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
+            <div *ngIf="zipcode?.errors?.['required']">
+              Zipcode is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="Podaj miasto" formControlName="city">
-        <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="errorMessage">
-          <div *ngIf="city?.errors?.['required']">
-            City is required
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Podaj miasto" formControlName="city">
+          <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="errorMessage">
+            <div *ngIf="city?.errors?.['required']">
+              City is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Podaj email" formControlName="email">
-        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="errorMessage">
-          <div *ngIf="email?.errors?.['required']">
-            Email is required
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Podaj email" formControlName="email">
+          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="errorMessage">
+            <div *ngIf="email?.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="email?.errors?.['email']">
+              Please enter correct email address
+            </div>
           </div>
-          <div *ngIf="email?.errors?.['email']">
-            Please enter correct email address
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="Podaj telefon" formControlName="phone">
+          <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
+            <div *ngIf="phone?.errors?.['required']">
+              Phone is required
+            </div>
           </div>
-        </div>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Phone</mat-label>
-        <input matInput placeholder="Podaj telefon" formControlName="phone">
-        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
-          <div *ngIf="phone?.errors?.['required']">
-            Phone is required
-          </div>
-        </div>
-      </mat-form-field>
+        </mat-form-field>
+      </div>
+      <div class="loginInfo" *ngIf="!isLoggedIn"><a routerLink="/login">Log in</a>, to track your order</div>
     </div>
     <div>
       <div fxLayoutGap="25px grid">

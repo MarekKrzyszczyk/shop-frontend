@@ -29,6 +29,7 @@ import {AdminOrderStatsComponent} from "./modules/admin/admin-order/admin-order-
 import {AdminLoginComponent} from "./modules/admin/admin-login/admin-login.component";
 import {FullpageadminemptyComponent} from "./layouts/fullpageadminempty/fullpageadminempty.component";
 import {AdminAuthorizeGuard} from "./modules/admin/common/guard/adminAuthorizeGuard";
+import {ProfileComponent} from "./modules/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
       {path: 'products/:slug', component: ProductDetailsComponent},
       {path: 'categories/:slug', component: CategoryComponent},
       {path: 'cart', component: CartComponent},
-      {path: 'order', component: OrderComponent}
+      {path: 'order', component: OrderComponent},
+      {path: 'profile', component: ProfileComponent}
     ]
   },
   {

@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div fxLayout="row">
+  <div fxFlex>
+    <h2>Log in</h2>
+    <form [formGroup]="loginForm" fxLayout="column" (submit)="login()" class="loginForm">
+      <div *ngIf="loginError" class="error">Enter correct data</div>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="username" placeholder="Podaj swój email">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+      </mat-form-field>
+      <button mat-flat-button color="primary">Log in</button>
+    </form>
+  </div>
+  <div fxFlex>
+    <h2>Registration</h2>
+    <form [formGroup]="registerForm" fxLayout="column" (submit)="register()" class="registerForm">
+      <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Repeat password</mat-label>
+        <input type="password" matInput formControlName="repeatPassword" placeholder="Repeat Password">
+      </mat-form-field>
+      <button mat-flat-button color="primary">Register</button>
+    </form>
+  </div>
+</div>
