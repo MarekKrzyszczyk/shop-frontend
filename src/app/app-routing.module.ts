@@ -30,6 +30,7 @@ import {AdminLoginComponent} from "./modules/admin/admin-login/admin-login.compo
 import {FullpageadminemptyComponent} from "./layouts/fullpageadminempty/fullpageadminempty.component";
 import {AdminAuthorizeGuard} from "./modules/admin/common/guard/adminAuthorizeGuard";
 import {ProfileComponent} from "./modules/profile/profile.component";
+import {ProfileAuthorizeGuard} from "./modules/common/guard/profileAuthorizeGuard";
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
       {path: 'categories/:slug', component: CategoryComponent},
       {path: 'cart', component: CartComponent},
       {path: 'order', component: OrderComponent},
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent, canActivate: [ProfileAuthorizeGuard]}
     ]
   },
   {
