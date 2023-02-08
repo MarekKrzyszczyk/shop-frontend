@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<h1>Orders</h1>
+<table mat-table [dataSource]="orders">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="placementDate">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.placementDate | date : 'yyyy-MM-dd HH:mm'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="orderStatus">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
+  </ng-container>
+  <ng-container matColumnDef="grossValue">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.grossValue}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
